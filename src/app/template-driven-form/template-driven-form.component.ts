@@ -19,4 +19,7 @@ export class TemplateDrivenFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  submit() {
+    console.log(this.user);
+  }
 }

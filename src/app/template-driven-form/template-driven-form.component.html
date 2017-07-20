@@ -1,5 +1,5 @@
 <h1>User profile</h1>
-<form novalidate #form="ngForm">
+<form novalidate #form="ngForm" (ngSubmit)="submit()">
   <div>
     <input type="text" placeholder="Username" [(ngModel)]="user.username" name="username" required #usernameCtrl="ngModel">
     <div *ngIf="!usernameCtrl.valid && usernameCtrl.dirty">
@@ -35,4 +35,5 @@
     </div>
   </div>
   <div>Form is {{form.valid ? 'valid' : 'invalid'}}</div>
+  <button type="submit">Submit</button>
 </form>
