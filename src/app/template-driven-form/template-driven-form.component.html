@@ -1,3 +1,20 @@
-<p>
-  template-driven-form works!
-</p>
+<h1>User profile</h1>
+<form novalidate>
+  <div>
+    <input type="text" placeholder="Username">
+  </div>
+  <div>
+    <input type="email" placeholder="Email">
+  </div>
+  <div>
+    <input type="password" placeholder="Password">
+  </div>
+  <div>
+    <input type="password" placeholder="Password again">
+  </div>
+  <div>
+    <select>
+      <option *ngFor="let gender of genderOptions">{{gender}}</option>
+    </select>
+  </div>
+</form>

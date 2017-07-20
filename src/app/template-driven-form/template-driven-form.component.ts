@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Gender } from '../gender.enum';
 
 @Component({
   selector: 'app-template-driven-form',
@@ -6,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./template-driven-form.component.css']
 })
 export class TemplateDrivenFormComponent implements OnInit {
+  genderOptions = Object.keys(Gender);
 
   constructor() { }
 
