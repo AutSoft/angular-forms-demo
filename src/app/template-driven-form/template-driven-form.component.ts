@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Gender } from '../gender.enum';
+import { User } from '../user';
 
 @Component({
   selector: 'app-template-driven-form',
@@ -8,8 +9,12 @@ import { Gender } from '../gender.enum';
 })
 export class TemplateDrivenFormComponent implements OnInit {
   genderOptions = Object.keys(Gender);
+  user: User;
 
-  constructor() { }
+  constructor() {
+    this.user = new User();
+    this.user.username = 'zizi';
+  }
 
   ngOnInit() {
   }
