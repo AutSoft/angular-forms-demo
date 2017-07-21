@@ -1,7 +1,12 @@
 <h1>Reactive user profile</h1>
-<form novalidate>
+<form novalidate [formGroup]="formGroup" (ngSubmit)="submit()">
   <div>
-    <input type="text" placeholder="Username">
+    <input type="text" placeholder="Username" formControlName="username">
+    <div *ngIf="!formGroup.controls['username'].valid && formGroup.controls['username'].dirty">
+      <div *ngIf="formGroup.controls['username'].hasError('required')">
+        <small>Username is required</small>
+      </div>
+    </div>
   </div>
   <div>
     <input type="email" placeholder="Email">
@@ -14,7 +19,7 @@
   </div>
   <div>
     <select>
-      <option></option>
+      <option *ngFor="let gender of genderOptions">{{gender}}</option>
     </select>
   </div>
   <div>
