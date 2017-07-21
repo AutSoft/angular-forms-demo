@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Gender } from '../gender.enum';
+import { CustomValidators } from 'ng2-validation';
 
 @Component({
   selector: 'app-reactive-form',
@@ -17,8 +18,14 @@ export class ReactiveFormComponent implements OnInit {
 
   initForm(formBuilder: FormBuilder) {
     this.formGroup = formBuilder.group({
-      username: ['zizi', Validators.required]
+      username: ['zizi', Validators.required],
+      email: [null, [Validators.required, Validators.email]],
+      password: [null, [Validators.required, Validators.minLength(6)]],
+      passwordAgain: null,
+      gender: [null, Validators.required],
+      phone: [null, Validators.required]
     });
+    this.formGroup.controls['passwordAgain'].setValidators(CustomValidators.equalTo(this.formGroup.controls['password']));
   }
 
   ngOnInit() {

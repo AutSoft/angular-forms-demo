@@ -9,22 +9,53 @@
     </div>
   </div>
   <div>
-    <input type="email" placeholder="Email">
+    <input type="email" placeholder="Email" formControlName="email">
+    <div *ngIf="!formGroup.controls['email'].valid && formGroup.controls['email'].dirty">
+      <div *ngIf="formGroup.controls['email'].hasError('required')">
+        <small>Email is required</small>
+      </div>
+      <div *ngIf="formGroup.controls['email'].hasError('email')">
+        <small>Invalid email address</small>
+      </div>
+    </div>
   </div>
   <div>
-    <input type="password" placeholder="Password">
+    <input type="password" placeholder="Password" formControlName="password">
+    <div *ngIf="!formGroup.controls['password'].valid && formGroup.controls['password'].dirty">
+      <div *ngIf="formGroup.controls['password'].hasError('required')">
+        <small>Password is required</small>
+      </div>
+      <div *ngIf="formGroup.controls['password'].hasError('minlength')">
+        <small>The length of the password must be at least 6 chars long</small>
+      </div>
+    </div>
   </div>
   <div>
-    <input type="password" placeholder="Password again">
+    <input type="password" placeholder="Password again" formControlName="passwordAgain">
+    <div *ngIf="!formGroup.controls['passwordAgain'].valid && formGroup.controls['passwordAgain'].dirty">
+      <div *ngIf="formGroup.controls['passwordAgain'].hasError('equalTo')">
+        <small>Must be same as password</small>
+      </div>
+    </div>
   </div>
   <div>
-    <select>
-      <option *ngFor="let gender of genderOptions">{{gender}}</option>
+    <select formControlName="gender">
+      <option *ngFor="let gender of genderOptions" [value]="gender">{{gender}}</option>
     </select>
+    <div *ngIf="!formGroup.controls['gender'].valid && formGroup.controls['gender'].dirty">
+      <div *ngIf="formGroup.controls['gender'].hasError('required')">
+        <small>Gender is required</small>
+      </div>
+    </div>
   </div>
   <div>
     <input type="checkbox">I want to receive SMS notifications
-    <input type="tel" placeholder="Phone" name="phone">
+    <input type="tel" placeholder="Phone" formControlName="phone">
+    <div *ngIf="!formGroup.controls['phone'].valid && formGroup.controls['phone'].dirty">
+      <div *ngIf="formGroup.controls['phone'].hasError('required')">
+        <small>Phone is required</small>
+      </div>
+    </div>
   </div>
   <button type="submit">Submit</button>
 </form>
