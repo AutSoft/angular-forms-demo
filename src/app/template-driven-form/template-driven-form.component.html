@@ -34,6 +34,15 @@
       <small *ngIf="genderCtrl.hasError('required')">Gender is required</small>
     </div>
   </div>
+  <div>
+    <input type="checkbox" #checkbox (change)="0">I want to receive SMS notifications
+    <input type="tel" [(ngModel)]="user.phone" placeholder="Phone" name="phone" required #phoneCtrl="ngModel" [disabled]="!checkbox.checked">
+    <div *ngIf="!phoneCtrl.valid && (phoneCtrl.dirty || form.submitted)">
+      <div *ngIf="phoneCtrl.hasError('required')">
+        <small>Phone is required</small>
+      </div>
+    </div>
+  </div>
   <div>Form is {{form.valid ? 'valid' : 'invalid'}}</div>
   <button type="submit">Submit</button>
 </form>
