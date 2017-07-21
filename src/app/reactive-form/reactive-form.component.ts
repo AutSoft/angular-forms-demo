@@ -26,6 +26,7 @@ export class ReactiveFormComponent implements OnInit {
       phone: [null, Validators.required]
     });
     this.formGroup.controls['passwordAgain'].setValidators(CustomValidators.equalTo(this.formGroup.controls['password']));
+    this.formGroup.controls['phone'].disable();
   }
 
   ngOnInit() {
@@ -33,6 +34,14 @@ export class ReactiveFormComponent implements OnInit {
 
   submit() {
     console.log(this.formGroup.value);
+  }
+
+  togglePhoneInputState(event) {
+    if (event.target.checked) {
+      this.formGroup.controls['phone'].enable();
+    } else {
+      this.formGroup.controls['phone'].disable();
+    }
   }
 
 }
