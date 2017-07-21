@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { ModelDrivenFormModule } from './model-driven-form/model-driven-form.module';
+import { ReactiveFormModule } from './reactive-form/reactive-form.module';
 import { TemplateDrivenFormModule } from './template-driven-form/template-driven-form.module';
 
 @NgModule({
@@ -11,7 +11,7 @@ import { TemplateDrivenFormModule } from './template-driven-form/template-driven
   ],
   imports: [
     BrowserModule,
-    ModelDrivenFormModule,
+    ReactiveFormModule,
     TemplateDrivenFormModule
   ],
   providers: [],
