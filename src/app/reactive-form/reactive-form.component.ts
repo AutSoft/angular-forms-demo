@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Gender } from '../gender.enum';
 import { CustomValidators } from 'ng2-validation';
+import { User } from '../user';
 
 @Component({
   selector: 'app-reactive-form',
@@ -9,27 +10,31 @@ import { CustomValidators } from 'ng2-validation';
   styleUrls: ['./reactive-form.component.css']
 })
 export class ReactiveFormComponent implements OnInit {
+  @Input() user: User;
   formGroup: FormGroup;
   genderOptions = Object.keys(Gender);
 
-  constructor(formBuilder: FormBuilder) {
-    this.initForm(formBuilder);
+  constructor(private formBuilder: FormBuilder) {
   }
 
   initForm(formBuilder: FormBuilder) {
     this.formGroup = formBuilder.group({
-      username: ['zizi', Validators.required],
+      username: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required, Validators.minLength(6)]],
       passwordAgain: null,
       gender: [null, Validators.required],
       phone: [null, Validators.required]
     });
+
+    this.formGroup.patchValue(this.user);
+
     this.formGroup.controls['passwordAgain'].setValidators(CustomValidators.equalTo(this.formGroup.controls['password']));
     this.formGroup.controls['phone'].disable();
   }
 
   ngOnInit() {
+    this.initForm(this.formBuilder);
   }
 
   submit() {
