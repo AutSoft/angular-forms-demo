@@ -1,3 +1,48 @@
-<p>
-  template-driven-form works!
-</p>
+<h1>User profile</h1>
+<form novalidate #form="ngForm" (ngSubmit)="submit()">
+  <div>
+    <input type="text" placeholder="Username" [(ngModel)]="user.username" name="username" required #usernameCtrl="ngModel">
+    <div *ngIf="!usernameCtrl.valid && (usernameCtrl.dirty || form.submitted)">
+      <small *ngIf="usernameCtrl.hasError('required')">Username is required</small>
+    </div>
+  </div>
+  <div>
+    <input type="email" placeholder="Email" [(ngModel)]="user.email" name="email" required email #emailCtrl="ngModel">
+    <div *ngIf="!emailCtrl.valid && (emailCtrl.dirty || form.submitted)">
+      <small *ngIf="emailCtrl.hasError('required')">Email is required</small>
+      <small *ngIf="emailCtrl.hasError('email')">Invalid email address</small>
+    </div>
+  </div>
+  <div>
+    <input type="password" placeholder="Password" [(ngModel)]="user.password" name="password" required minlength="6" #passwordCtrl="ngModel">
+    <div *ngIf="!passwordCtrl.valid && (passwordCtrl.dirty || form.submitted)">
+      <small *ngIf="passwordCtrl.hasError('required')">Password is required</small>
+      <small *ngIf="passwordCtrl.hasError('minlength')">The length of the password must be at least 6 chars long</small>
+    </div>
+  </div>
+  <div>
+    <input type="password" placeholder="Password again" ngModel name="passwordAgain" [equalTo]="passwordCtrl" #passwordAgainCtrl="ngModel">
+    <div *ngIf="!passwordAgainCtrl.valid && (passwordAgainCtrl.dirty || form.submitted)">
+      <small *ngIf="passwordAgainCtrl.hasError('equalTo')">Must be same as password</small>
+    </div>
+  </div>
+  <div>
+    <select [(ngModel)]="user.gender" name="gender" required #genderCtrl="ngModel">
+      <option *ngFor="let gender of genderOptions">{{gender}}</option>
+    </select>
+    <div *ngIf="!genderCtrl.valid && (genderCtrl.dirty || form.submitted)">
+      <small *ngIf="genderCtrl.hasError('required')">Gender is required</small>
+    </div>
+  </div>
+  <div>
+    <input type="checkbox" #checkbox (change)="0">I want to receive SMS notifications
+    <input type="tel" [(ngModel)]="user.phone" placeholder="Phone" name="phone" required #phoneCtrl="ngModel" [disabled]="!checkbox.checked">
+    <div *ngIf="!phoneCtrl.valid && (phoneCtrl.dirty || form.submitted)">
+      <div *ngIf="phoneCtrl.hasError('required')">
+        <small>Phone is required</small>
+      </div>
+    </div>
+  </div>
+  <div>Form is {{form.valid ? 'valid' : 'invalid'}}</div>
+  <button type="submit">Submit</button>
+</form>
