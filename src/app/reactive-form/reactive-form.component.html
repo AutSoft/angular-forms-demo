@@ -49,7 +49,7 @@
     </div>
   </div>
   <div>
-    <input type="checkbox" (change)="togglePhoneInputState($event)">I want to receive SMS notifications
+    <input type="checkbox" formControlName="checkbox">I want to receive SMS notifications
     <input type="tel" placeholder="Phone" formControlName="phone">
     <div *ngIf="!formGroup.controls['phone'].valid && formGroup.controls['phone'].dirty">
       <div *ngIf="formGroup.controls['phone'].hasError('required')">
