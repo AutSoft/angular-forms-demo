@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Gender } from '../gender.enum';
 import { User } from '../user';
 
@@ -8,13 +8,15 @@ import { User } from '../user';
   styleUrls: ['./template-driven-form.component.css']
 })
 export class TemplateDrivenFormComponent implements OnInit {
-  genderOptions = Object.keys(Gender);
   @Input() user: User;
+  @Output() userChange = new EventEmitter<User>();
+  genderOptions = Object.keys(Gender);
 
   ngOnInit() {
   }
 
   submit() {
     console.log(this.user);
+    this.userChange.emit(Object.assign({}, this.user));
   }
 }
