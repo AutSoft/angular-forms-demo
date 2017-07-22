@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 import { Gender } from '../gender.enum';
 import { User } from '../user';
-import { NgForm } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-template-driven-form',
@@ -15,6 +15,7 @@ export class TemplateDrivenFormComponent implements OnInit, OnChanges {
   @Output() userChange = new EventEmitter<User>();
   @ViewChild('checkbox') checkbox: ElementRef;
   @ViewChild('form') form: NgForm;
+  @ViewChild('usernameCtrl') usernameCtrl: NgModel;
   genderOptions = Object.keys(Gender);
   initedFromOutside = false;
 
@@ -25,6 +26,10 @@ export class TemplateDrivenFormComponent implements OnInit, OnChanges {
     if (changes['user']) {
       this.checkbox.nativeElement.checked = this.user.phone;
       this.initedFromOutside = true;
+      console.log(this.usernameCtrl.value);
+      setTimeout(() => {
+        console.log(this.usernameCtrl.value);
+      }, 0);
     }
   }
 

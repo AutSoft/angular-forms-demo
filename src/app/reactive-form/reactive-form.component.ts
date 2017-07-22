@@ -24,6 +24,7 @@ export class ReactiveFormComponent implements OnChanges {
     if (changes['user']) {
       this.formGroup.patchValue(this.user);
       this.submitted = true;
+      console.log(this.formGroup.controls['username'].value);
     }
   }
 
