@@ -12,6 +12,7 @@ import { User } from '../user';
 export class ReactiveFormComponent implements OnChanges {
   @Input() user: User;
   @Output() userChange = new EventEmitter<User>();
+  submitted = false;
   formGroup: FormGroup;
   genderOptions = Object.keys(Gender);
 
@@ -22,6 +23,7 @@ export class ReactiveFormComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['user']) {
       this.formGroup.patchValue(this.user);
+      this.submitted = true;
     }
   }
 
@@ -58,6 +60,7 @@ export class ReactiveFormComponent implements OnChanges {
   }
 
   submit() {
+    this.submitted = true;
     const user = this.formGroup.value;
     delete user.passwordAgain;
     delete user.checkbox;
