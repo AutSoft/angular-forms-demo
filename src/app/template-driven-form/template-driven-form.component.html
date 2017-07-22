@@ -2,13 +2,13 @@
 <form novalidate #form="ngForm" (ngSubmit)="submit()">
   <div>
     <input type="text" placeholder="Username" [(ngModel)]="user.username" name="username" required #usernameCtrl="ngModel">
-    <div *ngIf="!usernameCtrl.valid && (usernameCtrl.dirty || form.submitted)">
+    <div *ngIf="!usernameCtrl.valid && (usernameCtrl.dirty || form.submitted || initedFromOutside)">
       <small *ngIf="usernameCtrl.hasError('required')">Username is required</small>
     </div>
   </div>
   <div>
     <input type="email" placeholder="Email" [(ngModel)]="user.email" name="email" required email #emailCtrl="ngModel">
-    <div *ngIf="!emailCtrl.valid && (emailCtrl.dirty || form.submitted)">
+    <div *ngIf="!emailCtrl.valid && (emailCtrl.dirty || form.submitted || initedFromOutside)">
       <div *ngIf="emailCtrl.hasError('required')">
         <small>Email is required</small>
       </div>
@@ -19,7 +19,7 @@
   </div>
   <div>
     <input type="password" placeholder="Password" [(ngModel)]="user.password" name="password" required minlength="6" #passwordCtrl="ngModel">
-    <div *ngIf="!passwordCtrl.valid && (passwordCtrl.dirty || form.submitted)">
+    <div *ngIf="!passwordCtrl.valid && (passwordCtrl.dirty || form.submitted || initedFromOutside)">
       <div *ngIf="passwordCtrl.hasError('required')">
         <small>Password is required</small>
       </div>
@@ -30,7 +30,7 @@
   </div>
   <div>
     <input type="password" placeholder="Password again" ngModel name="passwordAgain" [equalTo]="passwordCtrl" #passwordAgainCtrl="ngModel">
-    <div *ngIf="!passwordAgainCtrl.valid && (passwordAgainCtrl.dirty || form.submitted)">
+    <div *ngIf="!passwordAgainCtrl.valid && (passwordAgainCtrl.dirty || form.submitted || initedFromOutside)">
       <small *ngIf="passwordAgainCtrl.hasError('equalTo')">Must be same as password</small>
     </div>
   </div>
@@ -38,14 +38,14 @@
     <select [(ngModel)]="user.gender" name="gender" required #genderCtrl="ngModel">
       <option *ngFor="let gender of genderOptions" [value]="gender">{{gender}}</option>
     </select>
-    <div *ngIf="!genderCtrl.valid && (genderCtrl.dirty || form.submitted)">
+    <div *ngIf="!genderCtrl.valid && (genderCtrl.dirty || form.submitted || initedFromOutside)">
       <small *ngIf="genderCtrl.hasError('required')">Gender is required</small>
     </div>
   </div>
   <div>
     <input type="checkbox" #checkbox (change)="0">I want to receive SMS notifications
     <input type="tel" [(ngModel)]="user.phone" placeholder="Phone" name="phone" required #phoneCtrl="ngModel" [disabled]="!checkbox.checked">
-    <div *ngIf="!phoneCtrl.valid && (phoneCtrl.dirty || form.submitted)">
+    <div *ngIf="!phoneCtrl.valid && (phoneCtrl.dirty || form.submitted || initedFromOutside)">
       <div *ngIf="phoneCtrl.hasError('required')">
         <small>Phone is required</small>
       </div>
