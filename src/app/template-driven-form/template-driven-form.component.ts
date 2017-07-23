@@ -26,9 +26,12 @@ export class TemplateDrivenFormComponent implements OnInit, OnChanges {
     if (changes['user']) {
       this.checkbox.nativeElement.checked = this.user.phone;
       this.initedFromOutside = true;
-      console.log(this.usernameCtrl.value);
+      console.log('template-driven form username: ' + this.user.username);
+      console.log('template-driven form username control: ' + this.usernameCtrl.value);
+      console.log('template-driven form validity: ' + this.form.valid);
       setTimeout(() => {
-        console.log(this.usernameCtrl.value);
+        console.log('template-driven form username control: ' + this.usernameCtrl.value);
+        console.log('template-driven form validity: ' + this.form.valid);
       }, 0);
     }
   }
